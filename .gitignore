@@ -33,5 +33,3 @@ target/
 .settings/org.eclipse.buildship.core.prefs
 .vscode
 .allure/
-allure.properties
-
