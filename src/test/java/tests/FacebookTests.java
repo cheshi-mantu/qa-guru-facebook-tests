@@ -1,15 +1,10 @@
 package tests;
 
 import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.SelenideWait;
-import helpers.fileReadHelper;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
-import io.qameta.allure.Step;
 import io.qameta.allure.Story;
-import org.junit.Before;
 import org.junit.jupiter.api.*;
-import org.openqa.selenium.chrome.ChromeOptions;
 import pages.FacebookPage;
 
 
@@ -18,7 +13,7 @@ import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 
 import static helpers.Environment.*;
-import static helpers.fileReadHelper.getStringFromFile;
+import static helpers.FileReadHelper.getStringFromFile;
 import static io.qameta.allure.Allure.step;
 
 
