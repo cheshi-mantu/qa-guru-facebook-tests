@@ -11,6 +11,8 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
+import static io.qameta.allure.Allure.step;
+
 import pages.GooglePage;
 
 @Epic("QA.GURU automation course")
@@ -26,8 +28,10 @@ class GoogleTests extends TestBase {
         Configuration.browser = "opera";
         GooglePage googlePage = new GooglePage();
         open("http://google.com");
+        step("Open search page", ()->{
+            $(byName("q")).val("lepra").pressEnter();
+        });
 
-        $(byName("q")).val("lepra").pressEnter();
 
         $("html").shouldHave(text("Лепрозорий: вход"));
     }
