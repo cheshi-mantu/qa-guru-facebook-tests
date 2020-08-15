@@ -1,25 +1,45 @@
 package tests;
 
+import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
+import helpers.Environment;
+import helpers.LoadCredentialsHelper;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 
 import static com.codeborne.selenide.WebDriverRunner.closeWebDriver;
+import static helpers.Environment.*;
+import static helpers.LoadCredentialsHelper.*;
 
 public class TestBase {
-    private String finalEmail ="";
-    private String finalPassword = "";
+    static String fbNameStr = "";
+    static String fbPasswordStr = "";
+    static String fbNameSurnameStr = "";
+    static String fbUrlStr = "";
+
 
     @BeforeAll
     public static void setUp() {
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(true));
+        Configuration.startMaximized = true;
+        Configuration.timeout = 10000;
 
-
+        if (isCiBuild) {
+        fbNameStr = fbUserName;
+        fbPasswordStr = fbPassword;
+        fbNameSurnameStr = fbNameSurname;
+        fbUrlStr = fbUrl;
+        } else {
+            fbNameStr = getCredentialsFromJson("fb_credentials.secret", "fb_username");
+            fbPasswordStr = getCredentialsFromJson("fb_credentials.secret", "fb_password");
+            fbNameSurnameStr = getCredentialsFromJson("fb_credentials.secret", "fb_name_surname");
+            fbUrlStr = fbUrl;
+        }
     }
 
     @AfterEach
-    public void closeBrowser(){
+    public void cleanUp(){
         closeWebDriver();
     }
 }

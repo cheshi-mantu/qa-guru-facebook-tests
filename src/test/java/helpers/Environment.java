@@ -1,13 +1,15 @@
 package helpers;
 
 public class Environment {
-    // config is common for all the tests
     public final static String
-
-        url = System.getProperty("url", "http://facebook.com"),
-        email = System.getProperty("email", "empty_string_returned"),
-        password = System.getProperty("password", "empty_string_returned"),
-        namesurname =  System.getProperty("namesurname", "Cheshi Mantu");
-
+        fbUrl = System.getProperty("fb_url", "http://facebook.com"),
+        fbUserName = System.getProperty("fb_username", null),
+        fbPassword = System.getProperty("fb_password", null),
+        fbNameSurname =  System.getProperty("fb_name_surname", null),
+        remoteDriverUrl = System.getProperty("remote_driver_url", null),
+        videoStorageUrl = System.getProperty("video_storage_url", null);
+    public static boolean
+            isCiBuild = remoteDriverUrl != null,
+            isVideoOn = videoStorageUrl != null;
 }
 
