@@ -19,14 +19,21 @@ import static io.qameta.allure.Allure.step;
 @Tag("facebook_test")
 class FacebookTests extends TestBase {
     @Test
-    @Description("Positive test with data-testid")
+    @Description("Positive log in test with data-testid")
     void successfulLoginWithTestId() {
-        open(fbUrlStr);
-        $(by("data-testid", "royal_email")).setValue(fbNameStr);
-        $(by("data-testid", "royal_pass")).setValue(fbPasswordStr);
-        $(by("data-testid", "royal_login_button")).click();
-        $(".linkWrap.noCount").shouldHave(text(fbNameSurnameStr));
+        step ("PREP: Open facebook page via http link", () -> {
+            open(fbUrlStr);
+        });
+        step ("ACT: Fill log-in data using data-testid attributes", () -> {
+            $(by("data-testid", "royal_email")).setValue(fbNameStr);
+            $(by("data-testid", "royal_pass")).setValue(fbPasswordStr);
+            $(by("data-testid", "royal_login_button")).click();
+        });
+        step ("CHECK: Opened page should contain name and surname " + fbNameSurnameStr, () -> {
+            $(".linkWrap.noCount").shouldHave(text(fbNameSurnameStr));
+        });
     }
+
     @Test
     @Description("Successfull Facebook Test with PageObject and Env")
     void successfulLoginWithPageObject() {
