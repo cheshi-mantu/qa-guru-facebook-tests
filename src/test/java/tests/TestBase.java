@@ -2,8 +2,6 @@ package tests;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
-import helpers.Environment;
-import helpers.LoadCredentialsHelper;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -23,7 +21,7 @@ public class TestBase {
     public static void setUp() {
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(true));
         Configuration.startMaximized = true;
-        Configuration.timeout = 10000;
+        Configuration.timeout = 10000; // facebook sometimes is quite slow
 
         if (isCiBuild) {
         fbNameStr = fbUserName;
