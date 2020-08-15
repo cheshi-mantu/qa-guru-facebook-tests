@@ -21,25 +21,6 @@ import static io.qameta.allure.Allure.step;
 @Story("Facebook tests")
 @Tag("facebook_test")
 class FacebookTests extends TestBase {
-    private String finalEmail ="";
-    private String finalPassword = "";
-    @BeforeEach
-    void setFinalEmail() {
-        if (email.equals("empty_string_returned")) {
-            finalEmail = getStringFromFile("D:\\code\\qa-guru-facebook-tests\\src\\test\\java\\tests\\facebookname.secret");
-        } else {
-            finalEmail = email;
-        }
-    }
-    @BeforeEach
-    void setFinalPassword(){
-        if (password.equals("empty_string_returned")) {
-            finalPassword = getStringFromFile("D:\\code\\qa-guru-facebook-tests\\src\\test\\java\\tests\\facebookpassword.secret");
-        } else {
-            finalPassword = password;
-        }
-    }
-
 // all stuff that starts with @ is from JUnit - platform for tests
 //    how to start the test from command line:
 //    gradle facebook_tests -Durl=http://facebook.com -Demail=cheshi.mantu@gmail.com -Dpassword=”fuckoff” -Dnamesurname="Cheshi Mantu"

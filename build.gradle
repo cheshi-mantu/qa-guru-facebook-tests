@@ -1,34 +1,26 @@
 buildscript {
-    // this is where we are going to find the libraries defined in "dependencies block" at below
     repositories {
         mavenCentral()
-        jcenter() // so basically this is the repository where we'll do the dependencies search
+        jcenter()
     }
-    // everything listed in the dependencies is actually a plugin, which we'll do "apply plugin" in our module level gradle file.
     dependencies {
         classpath group: 'io.qameta.allure', name: 'allure-gradle', version: '2.8.1'
     }
 }
 
 plugins {
-    //The Java Library plugin expands the capabilities of the Java plugin by providing specific knowledge about Java libraries. In particular, a Java library exposes an API to consumers (i.e., other projects using the Java or the Java Library plugin). All the source sets, tasks and configurations exposed by the Java plugin are implicitly available when using this plugin.
     id 'java-library'
-    // The Application plugin facilitates creating an executable JVM application. It makes it easy to start the application locally during development, and to package the application as a TAR and/or ZIP including operating system specific start scripts.
-    //Applying the Application plugin also implicitly applies the Java plugin. The main source set is effectively the “application”.
-    //Applying the Application plugin also implicitly applies the Distribution plugin. A main distribution is created that packages up the application, including code dependencies and generated start scripts.
     id 'application'
-    //Allure Gradle integration
     id 'io.qameta.allure' version '2.8.1'
 }
-// describes the output
+
 group 'cloud.autotests'
 version '1.0'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
-defaultTasks 'help'
 
 ext {
-    allureVersion = '2.13.3'
+    allureVersion = '2.13.5'
     junitVersion = '5.6.0'
 }
 
@@ -51,12 +43,11 @@ dependencies {
     testImplementation 'org.aspectj:aspectjweaver:1.9.5'
     testImplementation 'com.codeborne:selenide:5.11.1'
     testImplementation "io.qameta.allure:allure-selenide:${allureVersion}"
-    testImplementation "io.qameta.allure:allure-rest-assured:${allureVersion}"
-    testImplementation 'io.rest-assured:rest-assured:4.1.2'
+    testImplementation "io.qameta.allure:allure-junit5:${allureVersion}"
     testImplementation 'ch.qos.logback:logback-classic:1.2.3'
-
+    testImplementation 'org.json:json:20200518'
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+    testImplementation("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
 }
 
 tasks.withType(JavaCompile) {
@@ -72,15 +63,3 @@ task facebook_tests(type: Test) {
         includeTags 'facebook_test'
     }
 }
-task google_tests(type: Test) {
-    useJUnitPlatform {
-        includeTags 'google_test'
-    }
-}
-task yandex_tests(type: Test) {
-    useJUnitPlatform {
-        includeTags 'yandex_test'
-    }
-}
-
-
