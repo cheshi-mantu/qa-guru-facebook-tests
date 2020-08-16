@@ -7,6 +7,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 
 import static com.codeborne.selenide.WebDriverRunner.closeWebDriver;
+import static helpers.DriverHelper.configureSelenide;
 import static helpers.Environment.*;
 import static helpers.LoadCredentialsHelper.*;
 
@@ -20,6 +21,7 @@ public class TestBase {
     @BeforeAll
     public static void setUp() {
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(true));
+        configureSelenide();
         Configuration.startMaximized = true;
         Configuration.timeout = 10000; // facebook sometimes is quite slow
 
